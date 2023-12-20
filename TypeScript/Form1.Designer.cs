@@ -31,20 +31,21 @@
             button1 = new Button();
             button2 = new Button();
             textBox1 = new TextBox();
-            tabControl1 = new TabControl();
-            tabPage1 = new TabPage();
             richTextBox1 = new RichTextBox();
-            tabPage2 = new TabPage();
-            richTextBox2 = new RichTextBox();
             button3 = new Button();
-            tabControl1.SuspendLayout();
-            tabPage1.SuspendLayout();
-            tabPage2.SuspendLayout();
+            label1 = new Label();
+            richTextBox2 = new RichTextBox();
+            button4 = new Button();
+            button5 = new Button();
+            button6 = new Button();
+            button7 = new Button();
+            button8 = new Button();
+            button9 = new Button();
             SuspendLayout();
             // 
             // button1
             // 
-            button1.Location = new Point(300, 96);
+            button1.Location = new Point(179, 96);
             button1.Name = "button1";
             button1.Size = new Size(113, 29);
             button1.TabIndex = 1;
@@ -54,7 +55,7 @@
             // 
             // button2
             // 
-            button2.Location = new Point(610, 96);
+            button2.Location = new Point(741, 96);
             button2.Name = "button2";
             button2.Size = new Size(94, 29);
             button2.TabIndex = 2;
@@ -64,67 +65,24 @@
             // 
             // textBox1
             // 
-            textBox1.Location = new Point(300, 137);
+            textBox1.Location = new Point(179, 131);
             textBox1.Name = "textBox1";
-            textBox1.Size = new Size(711, 27);
+            textBox1.Size = new Size(1131, 27);
             textBox1.TabIndex = 3;
             textBox1.TextChanged += textBox1_TextChanged;
             // 
-            // tabControl1
-            // 
-            tabControl1.Controls.Add(tabPage1);
-            tabControl1.Controls.Add(tabPage2);
-            tabControl1.Location = new Point(309, 202);
-            tabControl1.Name = "tabControl1";
-            tabControl1.SelectedIndex = 0;
-            tabControl1.Size = new Size(709, 320);
-            tabControl1.TabIndex = 4;
-            // 
-            // tabPage1
-            // 
-            tabPage1.Controls.Add(richTextBox1);
-            tabPage1.Location = new Point(4, 29);
-            tabPage1.Name = "tabPage1";
-            tabPage1.Padding = new Padding(3);
-            tabPage1.Size = new Size(701, 287);
-            tabPage1.TabIndex = 0;
-            tabPage1.Text = "tabPage1";
-            tabPage1.UseVisualStyleBackColor = true;
-            // 
             // richTextBox1
             // 
-            richTextBox1.Dock = DockStyle.Fill;
-            richTextBox1.Location = new Point(3, 3);
+            richTextBox1.Location = new Point(192, 205);
             richTextBox1.Name = "richTextBox1";
-            richTextBox1.Size = new Size(695, 281);
+            richTextBox1.Size = new Size(588, 481);
             richTextBox1.TabIndex = 0;
             richTextBox1.Text = "";
             richTextBox1.TextChanged += richTextBox1_TextChanged;
             // 
-            // tabPage2
-            // 
-            tabPage2.Controls.Add(richTextBox2);
-            tabPage2.Location = new Point(4, 29);
-            tabPage2.Name = "tabPage2";
-            tabPage2.Padding = new Padding(3);
-            tabPage2.Size = new Size(701, 287);
-            tabPage2.TabIndex = 1;
-            tabPage2.Text = "tabPage2";
-            tabPage2.UseVisualStyleBackColor = true;
-            // 
-            // richTextBox2
-            // 
-            richTextBox2.Dock = DockStyle.Fill;
-            richTextBox2.Location = new Point(3, 3);
-            richTextBox2.Name = "richTextBox2";
-            richTextBox2.Size = new Size(695, 281);
-            richTextBox2.TabIndex = 0;
-            richTextBox2.Text = "";
-            richTextBox2.TextChanged += richTextBox2_TextChanged;
-            // 
             // button3
             // 
-            button3.Location = new Point(917, 96);
+            button3.Location = new Point(1216, 96);
             button3.Name = "button3";
             button3.Size = new Size(94, 29);
             button3.TabIndex = 5;
@@ -132,21 +90,105 @@
             button3.UseVisualStyleBackColor = true;
             button3.Click += button3_Click;
             // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.Font = new Font("Segoe UI", 19.8000011F, FontStyle.Regular, GraphicsUnit.Point);
+            label1.Location = new Point(596, 9);
+            label1.Name = "label1";
+            label1.Size = new Size(419, 46);
+            label1.TabIndex = 6;
+            label1.Text = "txtUMLJSON to TypeScript";
+            // 
+            // richTextBox2
+            // 
+            richTextBox2.Location = new Point(815, 205);
+            richTextBox2.Name = "richTextBox2";
+            richTextBox2.Size = new Size(495, 481);
+            richTextBox2.TabIndex = 0;
+            richTextBox2.Text = "";
+            richTextBox2.TextChanged += richTextBox2_TextChanged;
+            // 
+            // button4
+            // 
+            button4.Location = new Point(12, 212);
+            button4.Name = "button4";
+            button4.Size = new Size(145, 29);
+            button4.TabIndex = 7;
+            button4.Text = "Help";
+            button4.UseVisualStyleBackColor = true;
+            button4.Click += button4_Click;
+            // 
+            // button5
+            // 
+            button5.Location = new Point(421, 703);
+            button5.Name = "button5";
+            button5.Size = new Size(124, 52);
+            button5.TabIndex = 8;
+            button5.Text = "Copy JSON";
+            button5.UseVisualStyleBackColor = true;
+            button5.Click += button5_Click;
+            // 
+            // button6
+            // 
+            button6.Location = new Point(1022, 703);
+            button6.Name = "button6";
+            button6.Size = new Size(113, 52);
+            button6.TabIndex = 9;
+            button6.Text = "Copy Code";
+            button6.UseVisualStyleBackColor = true;
+            button6.Click += button6_Click;
+            // 
+            // button7
+            // 
+            button7.Location = new Point(730, 704);
+            button7.Name = "button7";
+            button7.Size = new Size(115, 50);
+            button7.TabIndex = 10;
+            button7.Text = "Clear Box";
+            button7.UseVisualStyleBackColor = true;
+            button7.Click += button7_Click;
+            // 
+            // button8
+            // 
+            button8.Location = new Point(12, 273);
+            button8.Name = "button8";
+            button8.Size = new Size(145, 29);
+            button8.TabIndex = 11;
+            button8.Text = "Parsing Code";
+            button8.UseVisualStyleBackColor = true;
+            button8.Click += button8_Click;
+            // 
+            // button9
+            // 
+            button9.Location = new Point(12, 333);
+            button9.Name = "button9";
+            button9.Size = new Size(145, 29);
+            button9.TabIndex = 12;
+            button9.Text = "VisualizeJSON";
+            button9.UseVisualStyleBackColor = true;
+            button9.Click += button9_Click;
+            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1140, 562);
+            ClientSize = new Size(1332, 903);
+            Controls.Add(button9);
+            Controls.Add(button8);
+            Controls.Add(button7);
+            Controls.Add(button6);
+            Controls.Add(button5);
+            Controls.Add(button4);
+            Controls.Add(richTextBox2);
+            Controls.Add(richTextBox1);
+            Controls.Add(label1);
             Controls.Add(button3);
-            Controls.Add(tabControl1);
             Controls.Add(textBox1);
             Controls.Add(button2);
             Controls.Add(button1);
             Name = "Form1";
             Text = "Form1";
-            tabControl1.ResumeLayout(false);
-            tabPage1.ResumeLayout(false);
-            tabPage2.ResumeLayout(false);
             ResumeLayout(false);
             PerformLayout();
         }
@@ -155,11 +197,15 @@
         private Button button1;
         private Button button2;
         private TextBox textBox1;
-        private TabControl tabControl1;
-        private TabPage tabPage1;
-        private TabPage tabPage2;
         private RichTextBox richTextBox1;
-        private RichTextBox richTextBox2;
         private Button button3;
+        private Label label1;
+        private RichTextBox richTextBox2;
+        private Button button4;
+        private Button button5;
+        private Button button6;
+        private Button button7;
+        private Button button8;
+        private Button button9;
     }
 }

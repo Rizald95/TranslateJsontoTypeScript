@@ -14,6 +14,9 @@ using System.DirectoryServices.ActiveDirectory;
 using static JSONtoTypeScript.Form1.JsonData;
 using System.Xml.Linq;
 
+
+
+
 namespace JSONtoTypeScript
 {
     public enum AssociationMultiplicity
@@ -71,6 +74,23 @@ namespace JSONtoTypeScript
                 else if (model.type == "association" && model.model != null)
                 {
                     GenerateTypeScriptAssosiationClass(model.model);
+                }
+            }
+
+            bool generateAssocClass = json.model.Any(model => model.type == "association");
+
+            if (generateAssocClass)
+            {
+                sourceCodeBuilder.AppendLine($"//Ex Assosiation between class");
+                GenerateTypeScriptAssocRelation();
+            }
+
+
+            foreach (var model in json.model)
+            {
+                if (model.type == "association")
+                {
+                    GenerateTypeScriptObjAssociation(model);
                 }
             }
             // Display or save the generated TypeScript code
@@ -275,7 +295,7 @@ namespace JSONtoTypeScript
 
         private void GenerateTypeScriptGetState()
         {
-            
+
             sourceCodeBuilder.AppendLine($"     public  GetState(): string {{");
             sourceCodeBuilder.AppendLine($"      return  this.state;");
             sourceCodeBuilder.AppendLine($"}}\n");
@@ -306,9 +326,33 @@ namespace JSONtoTypeScript
             }
         }
 
+        private void GenerateTypeScriptAssocRelation()
+        {
+
+            sourceCodeBuilder.AppendLine($"class Association{{");
+            sourceCodeBuilder.AppendLine($"     constructor( class1 : string, class2: string) {{");
+            sourceCodeBuilder.AppendLine($"}}");
+            sourceCodeBuilder.AppendLine($"}}");
+            sourceCodeBuilder.AppendLine($"\n");
+        }
+
+        private void GenerateTypeScriptObjAssociation(JsonData.Model assoc)
+        {
+            sourceCodeBuilder.Append($"const {assoc.name} = new Association(");
+
+            foreach (var association in assoc.@class)
+            {
+                sourceCodeBuilder.Append($"\"{association.class_name}\",");
+            }
+
+            sourceCodeBuilder.Length -= 1; // Remove the last character (",")
+
+            sourceCodeBuilder.AppendLine($");");
+        }
 
 
-   
+
+
 
 
 
@@ -343,7 +387,7 @@ namespace JSONtoTypeScript
             {
                 selectedJsonFilePath = dialog.FileName;
                 string displayJson = File.ReadAllText(selectedJsonFilePath);
-                tabControl1.SelectTab(tabPage1);
+
                 richTextBox1.Text = displayJson;
 
                 // Set the path to textBox1
@@ -351,6 +395,7 @@ namespace JSONtoTypeScript
             }
         }
 
+        //exports JSON files
         private void button2_Click(object sender, EventArgs e)
         {
             try
@@ -371,6 +416,8 @@ namespace JSONtoTypeScript
 
         }
 
+
+
         private void textBox1_TextChanged(object sender, EventArgs e)
         {
 
@@ -388,7 +435,7 @@ namespace JSONtoTypeScript
 
 
 
-         public class JsonData
+        public class JsonData
         {
             public string type { get; set; }
             public string sub_id { get; set; }
@@ -399,6 +446,8 @@ namespace JSONtoTypeScript
                 public string type { get; set; }
                 public string class_id { get; set; }
                 public string class_name { get; set; }
+
+                public string name { get; set; }
                 public string KL { get; set; }
                 public List<Attribute1> attributes { get; set; }
                 public List<State> states { get; set; }
@@ -460,6 +509,7 @@ namespace JSONtoTypeScript
             }
         }
 
+        //export button .ts
         private void button3_Click(object sender, EventArgs e)
         {
             SaveFileDialog saveFileDialog = new SaveFileDialog();
@@ -474,7 +524,7 @@ namespace JSONtoTypeScript
                 {
                     using (StreamWriter sw = new StreamWriter(filePath))
                     {
-                        
+
                         sw.Write(richTextBox2.Text);
                     }
 
@@ -486,5 +536,114 @@ namespace JSONtoTypeScript
                 }
             }
         }
+
+        private void textBox2_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void tabPage1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        //Button Help
+        private void button4_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("How to Use the Traslate xtUMLJSON Application:\n1. Upload your JSON template file\n2. Click the 'Translate' button \n3. The result will be displayed qith Object-Oriented Programming\n4. If you want to Export the result to a TypeScript file, please click the 'Save' button", "Help", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
+
+        //Copy JSON button
+        private void button5_Click(object sender, EventArgs e)
+        {
+            {
+                if (!string.IsNullOrEmpty(richTextBox1.Text))
+                {
+                    Clipboard.SetText(richTextBox1.Text);
+                    MessageBox.Show("JSON content copied to clipboard!", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+                else
+                {
+                    MessageBox.Show("Please select JSON file first!", "Warning");
+                }
+            }
+        }
+
+        //Copy Code Program Button
+        private void button6_Click(object sender, EventArgs e)
+        {
+            if (!string.IsNullOrEmpty(richTextBox2.Text))
+            {
+                Clipboard.SetText(richTextBox2.Text);
+                MessageBox.Show("TypeScript Code Program copied to clipboard!", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            else
+            {
+                MessageBox.Show("Please translate JSON file first!", "Warning");
+            }
+        }
+
+        // Clear richtextbox 1 & 2 content
+        private bool isTextCleared = false;
+        private void button7_Click(object sender, EventArgs e)
+        {
+            richTextBox1.Clear();
+            richTextBox2.Clear();
+            button5.Enabled = false;
+            button6.Enabled = false;
+            button3.Enabled = false;
+
+
+
+
+            isTextCleared = true;
+        }
+
+
+        // Button for Passing Code
+        private void button8_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private PictureBox pictureBox;
+        private Button okButton;
+
+   
+        private void InitializeComponents()
+        {
+            pictureBox = new System.Windows.Forms.PictureBox
+            {
+                SizeMode = PictureBoxSizeMode.AutoSize,
+                Dock = DockStyle.Fill
+            };
+
+            // Inisialisasi tombol OK
+            okButton = new System.Windows.Forms.Button
+            {
+                Text = "OK",
+                DialogResult = DialogResult.OK,
+                Dock = DockStyle.Bottom
+            };
+
+            // Menambahkan PictureBox dan tombol OK ke dalam Controls (form)
+            Controls.Add(pictureBox);
+            Controls.Add(okButton);
+
+            // Menangani perubahan ukuran form untuk mengatur ulang posisi tombol OK
+            SizeChanged += (sender, e) =>
+            {
+                okButton.Location = new Point(ClientSize.Width / 2 - okButton.Width / 2, ClientSize.Height - okButton.Height - 10);
+            };
+        }
+
+        //button for visualizer JSONcode
+        private void button9_Click(object sender, EventArgs e)
+        {
+
+        }
     }
+
+
+       
 }
